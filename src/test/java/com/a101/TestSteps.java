@@ -2,6 +2,7 @@ package com.a101;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.AppiumFluentWait;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.junit.jupiter.api.Test;
@@ -14,15 +15,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class TestSteps {
     /*
-    Given User taps to A101 application
-    When User hovers mouse over <giyim ve aksesuar> module
-    And User taps <Dizaltı Çorap> category from opened submenu
-    And User taps first product
-    Then Verify that color is black of the product
-    And User taps <Sepete Ekle> button
+
+    When
+    And
+    And
+    Then
+    And
     When User taps <Sepeti Görüntüle> button
     Then Verify that user can see the product in the basket
     And User taps <Sepeti Onayla> button
@@ -41,27 +44,39 @@ public class TestSteps {
 
     @Test
     public void paymentFailMessage() throws InterruptedException, MalformedURLException {
+        //User taps to A101 application
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        //desiredCapabilities.setCapability("platformName","Android"); //1. yol
         desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, Platform.ANDROID);
         desiredCapabilities.setCapability(MobileCapabilityType.VERSION,"12.0");
         desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME,"Google_Pixel_3");
         desiredCapabilities.setCapability("appPackage", "org.studionord.a101");
-        // Set your application's package name.
-
         desiredCapabilities.setCapability("appActivity", "org.studionord.a101.MainActivity");
-        // Set your application's MainActivity i.e. the LAUNCHER activity name.
         driver = new AppiumDriver<MobileElement>(new URL("http://localhost:4723/wd/hub"),desiredCapabilities);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.findElement(MobileBy.id("android:id/button2")).click();
 
-        MobileElement iptalButton = driver.findElement(By.id("android:id/button2"));
-        WebDriverWait wait = new WebDriverWait(driver,10);
-        wait.until(ExpectedConditions.visibilityOf(iptalButton));
-        try {
+        //User taps hamburger button
+       driver.findElement(By.ByXPath.xpath("(//android.widget.TextView)[1]")).click();
 
-            iptalButton.click();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+        //User taps <GİYİM & AKSESUAR> category from opened submenu
+        driver.findElement(By.xpath("//android.widget.TextView")).click();
+
+        //User taps "Kadın İç Giyim"
+        driver.findElement(By.xpath("(//android.widget.TextView)[8]")).click();
+
+        //User taps "Dizaltı Çorap"
+        driver.findElement(By.xpath("(//android.widget.TextView)[14]")).click();
+
+        //User taps <Sepete Ekle> button
+
+
+
+
+
+
+
+
+
 
 
 
