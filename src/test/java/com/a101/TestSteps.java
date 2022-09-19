@@ -1,10 +1,12 @@
 package com.a101;
 
+import com.google.common.base.Verify;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.AppiumFluentWait;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.aspectj.lang.annotation.After;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
@@ -67,21 +69,16 @@ public class TestSteps {
         //User taps "Dizaltı Çorap"
         driver.findElement(By.xpath("(//android.widget.TextView)[14]")).click();
 
+        //User taps first product
+        driver.findElement(By.xpath("(//android.widget.TextView)[12]")).click();
+
+        //Verify that color is black of the product
+        //driver.findElement(By.xpath(""))
+
         //User taps <Sepete Ekle> button
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     }
+
 }
