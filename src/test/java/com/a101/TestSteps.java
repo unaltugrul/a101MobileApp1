@@ -63,7 +63,18 @@ public class TestSteps {
         driver.findElement(MobileBy.id("android:id/button1")).click();
 
         //User taps hamburger button
-       driver.findElement(By.ByXPath.xpath("(//android.widget.TextView)[1]")).click();
+
+        try {
+            List<MobileElement> hamburgerButton = driver.findElements(MobileBy.className("android.widget.TextView"));
+            hamburgerButton.get(0).click();
+        }catch (Exception e){
+            List<MobileElement> mainPicture = driver.findElements(MobileBy.className("android.widget.ImageView"));
+            mainPicture.get(0).click();
+            driver.findElement(MobileBy.className("android.widget.TextView")).click();
+
+        }
+
+
 
         //User taps <GİYİM & AKSESUAR> category from opened submenu
         driver.findElement(By.xpath("//android.widget.TextView")).click();
