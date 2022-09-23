@@ -170,7 +170,10 @@ public class TestSteps {
         kaydetButton.get(1).click();
         //driver.findElement(MobileBy.xpath("//*[@text='KAYDET']")).click();
 
-        //User taps <Sepete Ekle> button
+        //User selects any radio button
+        Thread.sleep(2000);
+        List<MobileElement> radioButton = driver.findElements(MobileBy.className("android.widget.RadioButton"));
+        radioButton.get(radioButton.size()-1).click();
 
 
 
