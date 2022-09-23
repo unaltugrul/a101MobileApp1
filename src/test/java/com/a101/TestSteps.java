@@ -259,7 +259,7 @@ public class TestSteps {
 
     @AfterEach
     public void cleanUp(){
-        //driver.closeApp();
+        driver.closeApp();
     }
 
 }
