@@ -191,6 +191,75 @@ public class TestSteps {
             switch (eachNumber){
                 case "0":
 
+                    touchAction.tap(PointOption.point(570,2750)).perform();
+                    break;
+                case "1":
+
+                    touchAction.tap(PointOption.point(180,2090)).perform();
+                    break;
+                case "2":
+
+                    touchAction.tap(PointOption.point(570,2090)).perform();
+                    break;
+                case "3":
+
+                    touchAction.tap(PointOption.point(940,2090)).perform();
+                    break;
+                case "4":
+
+                    touchAction.tap(PointOption.point(180,2300)).perform();
+                    break;
+                case "5":
+
+                    touchAction.tap(PointOption.point(570,2300)).perform();
+                    break;
+                case "6":
+
+                    touchAction.tap(PointOption.point(940,2300)).perform();
+                    break;
+                case "7":
+
+                    touchAction.tap(PointOption.point(180,2500)).perform();
+                    break;
+                case "8":
+
+                    touchAction.tap(PointOption.point(570,2500)).perform();
+                    break;
+                case "9":
+
+                    touchAction.tap(PointOption.point(940,2500)).perform();
+                    break;
+            }
+        }
+        touchAction.tap(PointOption.point(1300,2750)).perform();
+        //driver.hideKeyboard();
+        Thread.sleep(1000);
+
+        List<MobileElement> spinners = driver.findElements(MobileBy.className("android.widget.Spinner"));
+        spinners.get(0).click();
+        driver.findElement(MobileBy.xpath("//*[@text='10']")).click();
+        spinners.get(1).click();
+        driver.findElement(MobileBy.xpath("//*[@text='2025']")).click();
+        paymentBoxes.get(2).sendKeys("000");
+
+        //User taps <Siparişi Tamamla> button
+        driver.findElement(MobileBy.xpath("//*[@text='Siparişi Tamamla']")).click();
+        driver.findElement(MobileBy.className("android.widget.CheckBox")).click();
+
+        //Verify that user navigated to page of bank
+        WebDriverWait wait2 = new WebDriverWait(driver,10);
+        wait2.until(ExpectedConditions.visibilityOf(driver.findElement(MobileBy.xpath("//*[@text='Özür dileriz, teknik nedenlerden dolayı şu anda işleminizi gerçekleştiremiyoruz.\n" +
+                "Lütfen bir süre sonra tekrar deneyiniz.']"))));
+
+        Assertions.assertTrue(driver.findElement(MobileBy.xpath("//*[@text='Özür dileriz, teknik nedenlerden dolayı şu anda işleminizi gerçekleştiremiyoruz.\n" +
+                "Lütfen bir süre sonra tekrar deneyiniz.']")).isDisplayed());
+
+
+    }
+
+    @AfterEach
+    public void cleanUp(){
+        //driver.closeApp();
     }
 
 }
