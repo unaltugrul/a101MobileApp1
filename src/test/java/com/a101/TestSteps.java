@@ -1,55 +1,44 @@
 package com.a101;
 
-import com.google.common.base.Verify;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.AppiumFluentWait;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
+import com.github.javafaker.Faker;
+import io.appium.java_client.*;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.remote.MobileCapabilityType;
-import org.aspectj.lang.annotation.After;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.WebElement;
+import io.appium.java_client.touch.LongPressOptions;
+import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.ElementOption;
+import io.appium.java_client.touch.offset.PointOption;
+import org.junit.jupiter.api.*;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class TestSteps {
-    /*
 
-    When
-    And
-    And
-    Then
-    And
-    When User taps <Sepeti Görüntüle> button
-    Then Verify that user can see the product in the basket
-    And User taps <Sepeti Onayla> button
-    And User taps <ÜYE OLMADAN DEVAM ET> button
-    And User taps email address and clicks enter key
-    When User taps <Yeni adres oluştur> link
-    And User enters required information
-    And User taps <Kaydet> button
-    And User selects any radio button
-    And User taps <Kaydet ve Devam Et> button
-    And User enters wrong payment information and selects checkbox
-    And User taps <Siparişi Tamamla> button
-    Then Verify that user can see error message
-    */
     AppiumDriver<MobileElement> driver;
+    Faker faker = new Faker();
 
-    @Test
-    public void paymentFailMessage() throws InterruptedException, MalformedURLException {
+
+    @BeforeEach
+    public void setUp() throws MalformedURLException {
         //User taps to A101 application
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, Platform.ANDROID);
-        desiredCapabilities.setCapability(MobileCapabilityType.VERSION,"12.0");
+        desiredCapabilities.setCapability(MobileCapabilityType.VERSION,"10.0");
         desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME,"Google_Pixel_3");
         desiredCapabilities.setCapability("appPackage", "org.studionord.a101");
         desiredCapabilities.setCapability("appActivity", "org.studionord.a101.MainActivity");
@@ -76,17 +65,28 @@ public class TestSteps {
 
 
 
-        //User taps <GİYİM & AKSESUAR> category from opened submenu
-        driver.findElement(By.xpath("//android.widget.TextView")).click();
+       //User taps <GİYİM & AKSESUAR> category from opened submenu
+
+       driver.findElement(MobileBy.xpath("//*[@text='GİYİM & AKSESUAR']")).click();
 
         //User taps "Kadın İç Giyim"
-        driver.findElement(By.xpath("(//android.widget.TextView)[8]")).click();
+       driver.findElement(MobileBy.xpath("//*[@text='Kadın İç Giyim']")).click();
 
         //User taps "Dizaltı Çorap"
-        driver.findElement(By.xpath("(//android.widget.TextView)[14]")).click();
+       driver.findElement(MobileBy.xpath("//*[@text='Dizaltı Çorap']")).click();
 
+       Thread.sleep(1000);
         //User taps first product
-        driver.findElement(By.xpath("(//android.widget.TextView)[12]")).click();
+        List<MobileElement> images = driver.findElements(MobileBy.className("android.widget.ImageView"));
+        images.get(0).click();
+       //driver.findElement(By.xpath("//*[@text='Penti Kadın 50 Denye Pantolon Çorabı Siyah']")).click();
+        //android.widget.TextView 11.
+        Thread.sleep(1000);
+        //User taps <Sepete Ekle> button
+        driver.findElement(MobileBy.xpath("//*[@text='SEPETE EKLE']")).click();
+        Thread.sleep(1000);
+        //User taps <Sepeti Git> button
+        driver.findElement(MobileBy.xpath("//*[@text='SEPETE GİT']")).click();
 
         //Verify that color is black of the product
         Assertions.assertEquals("SİYAH",driver.findElement(MobileBy.xpath("//*[@text='SİYAH']")).getAttribute("text"));
