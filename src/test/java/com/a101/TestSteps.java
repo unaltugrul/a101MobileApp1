@@ -175,6 +175,8 @@ public class TestSteps {
         List<MobileElement> radioButton = driver.findElements(MobileBy.className("android.widget.RadioButton"));
         radioButton.get(radioButton.size()-1).click();
 
+        //User taps <Kaydet ve Devam Et> button
+        driver.findElement(MobileBy.xpath("//*[@text='Kaydet ve Devam Et']")).click();
 
 
     }
