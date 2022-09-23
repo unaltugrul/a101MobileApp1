@@ -89,7 +89,86 @@ public class TestSteps {
         driver.findElement(By.xpath("(//android.widget.TextView)[12]")).click();
 
         //Verify that color is black of the product
-        //driver.findElement(By.xpath(""))
+        Assertions.assertEquals("SİYAH",driver.findElement(MobileBy.xpath("//*[@text='SİYAH']")).getAttribute("text"));
+
+        //Verify that user can see the product in the basket
+        Assertions.assertTrue(driver.findElement(MobileBy.xpath("//*[@text='Penti Kadın 50 Denye Pantolon Çorabı Siyah']")).isDisplayed());
+
+        //User taps <Sepeti Onayla> button
+        driver.findElement(MobileBy.xpath("//*[@text='SEPETİ ONAYLA']")).click();
+
+        //User taps <ÜYE OLMADAN DEVAM ET> button
+        driver.findElement(MobileBy.xpath("//*[@text='ÜYE OLMADAN DEVAM ET']")).click();
+
+        //User enters email address
+        String emailAddress = faker.internet().emailAddress();
+        driver.findElement(MobileBy.xpath("//*[@text='E-posta Adresiniz']")).sendKeys(emailAddress);
+
+
+        //user select check box
+        List<MobileElement> checkBox = driver.findElements(MobileBy.className("android.view.ViewGroup"));
+        checkBox.get(3).click();
+
+
+        //User taps <GÖNDER> button
+        driver.findElement(MobileBy.xpath("//*[@text='GÖNDER']")).click();
+
+        //User accepts the cookies
+        try {
+            WebDriverWait wait = new WebDriverWait(driver,10);
+            wait.until(ExpectedConditions.visibilityOf(driver.findElement(MobileBy.xpath("//*[@text='Kabul Et']"))));
+        }catch (Exception e){
+
+        }
+
+        driver.findElement(MobileBy.xpath("//*[@text='Kabul Et']")).click();
+
+        //User taps <Yeni adres oluştur>
+        //driver.findElement(MobileBy.xpath("//*[@text='\uE919 Yeni adres oluştur']")).click();
+        try {
+            WebDriverWait wait = new WebDriverWait(driver,10);
+            wait.until(ExpectedConditions.visibilityOf(driver.findElement(MobileBy.className("android.view.View"))));
+        }catch (Exception e){
+
+        }
+
+        List<MobileElement> yeniAdresOlustur = driver.findElements(MobileBy.className("android.view.View"));
+        for (MobileElement mobileElement : yeniAdresOlustur) {
+            if (mobileElement.getAttribute("text").contains("Yeni adres oluştur")){
+                mobileElement.click();
+            }
+        }
+        Thread.sleep(1000);
+
+        //User enters required information
+        List<MobileElement> informationBoxes = driver.findElements(MobileBy.className("android.widget.EditText"));
+        informationBoxes.get(0).sendKeys("Home");
+        informationBoxes.get(1).sendKeys(faker.name().firstName());
+        informationBoxes.get(2).sendKeys(faker.name().lastName());
+        informationBoxes.get(3).sendKeys("3126477178");
+        driver.findElement(MobileBy.xpath("//*[@text='Seçiniz']")).click();
+        driver.findElement(MobileBy.xpath("//*[@text='İSTANBUL']")).click();
+        driver.findElement(MobileBy.xpath("//*[@text='Seçiniz']")).click();
+        driver.findElement(MobileBy.xpath("//*[@text='ADALAR']")).click();
+        driver.findElement(MobileBy.xpath("//*[@text='Seçiniz']")).click();
+        driver.findElement(MobileBy.xpath("//*[@text='BURGAZADA MAH']")).click();
+
+        String fulLAddres = faker.address().fullAddress();
+        informationBoxes.get(4).sendKeys( " ");
+        informationBoxes.get(4).sendKeys( "397 Hettinger Prairie Alexandria Connecticut");
+
+        TouchAction action = new TouchAction(driver);
+        action.press(PointOption.point(945,900))
+                .waitAction(new WaitOptions().withDuration(Duration.ofMillis(600)))
+                .moveTo(PointOption.point(945, 440))
+                .release()
+                .perform();
+
+        WebDriverWait wait = new WebDriverWait(driver,20);
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(MobileBy.xpath("//*[@text='KAYDET']"))));
+        List<MobileElement> kaydetButton = driver.findElements(MobileBy.className("android.widget.Button"));
+        kaydetButton.get(1).click();
+        //driver.findElement(MobileBy.xpath("//*[@text='KAYDET']")).click();
 
         //User taps <Sepete Ekle> button
 
