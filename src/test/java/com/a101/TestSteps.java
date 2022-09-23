@@ -178,6 +178,18 @@ public class TestSteps {
         //User taps <Kaydet ve Devam Et> button
         driver.findElement(MobileBy.xpath("//*[@text='Kaydet ve Devam Et']")).click();
 
+        //User enters payment information and selects checkbox
+        Thread.sleep(1000);
+        List<MobileElement> paymentBoxes = driver.findElements(MobileBy.className("android.widget.EditText"));
+        paymentBoxes.get(0).sendKeys("isbankasi");
+        paymentBoxes.get(1).click();
+        Thread.sleep(1000);
+        String cardNumber = "9792042022562362";
+        String[] card =  cardNumber.split("");
+        TouchAction touchAction = new TouchAction<>(driver);
+        for (String eachNumber : card) {
+            switch (eachNumber){
+                case "0":
 
     }
 
