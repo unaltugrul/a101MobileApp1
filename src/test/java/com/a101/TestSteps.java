@@ -54,8 +54,13 @@ public class TestSteps {
         desiredCapabilities.setCapability("appPackage", "org.studionord.a101");
         desiredCapabilities.setCapability("appActivity", "org.studionord.a101.MainActivity");
         driver = new AppiumDriver<MobileElement>(new URL("http://localhost:4723/wd/hub"),desiredCapabilities);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.findElement(MobileBy.id("android:id/button2")).click();
+        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+    }
+
+    @Test
+    public void paymentFailMessage() throws InterruptedException {
+        //user clicks to "YUKLE" for updating
+        driver.findElement(MobileBy.id("android:id/button1")).click();
 
         //User taps hamburger button
        driver.findElement(By.ByXPath.xpath("(//android.widget.TextView)[1]")).click();
