@@ -1,4 +1,4 @@
-package com.a101;
+package com.a101.test_steps;
 
 import com.github.javafaker.Faker;
 import io.appium.java_client.*;
@@ -224,6 +224,7 @@ public class T1_Payment {
                     break;
             }
         }
+        Thread.sleep(1000);
         touchAction.tap(PointOption.point(1300, 2750)).perform();
         Thread.sleep(1000);
         List<MobileElement> spinners = driver.findElements(MobileBy.className("android.widget.Spinner"));
