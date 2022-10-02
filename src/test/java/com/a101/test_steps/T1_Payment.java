@@ -50,7 +50,12 @@ public class T1_Payment {
     public void paymentScreenVerification() throws InterruptedException {
 
         //************ 2 - User clicks to "YUKLE" for updating
-        driver.findElement(MobileBy.id("android:id/button1")).click();
+        try {
+            WebDriverWait wait = new WebDriverWait(driver,20);
+            wait.until(ExpectedConditions.visibilityOf(driver.findElement(MobileBy.id("android:id/button1"))));
+            driver.findElement(MobileBy.id("android:id/button1")).click();
+        } catch (Exception e) {
+        }
 
         //************ 3 - User taps hamburger button
         try {
@@ -112,8 +117,8 @@ public class T1_Payment {
 
         //************ 17 - User accepts the cookies
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 10);
-            wait.until(ExpectedConditions.visibilityOf(driver.findElement(MobileBy.xpath("//*[@text='Kabul Et']"))));
+            WebDriverWait wait1 = new WebDriverWait(driver, 10);
+            wait1.until(ExpectedConditions.visibilityOf(driver.findElement(MobileBy.xpath("//*[@text='Kabul Et']"))));
         } catch (Exception e) {
         }
 
@@ -121,8 +126,8 @@ public class T1_Payment {
 
         //************ 18 - User taps <Yeni adres oluştur>
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 10);
-            wait.until(ExpectedConditions.visibilityOf(driver.findElement(MobileBy.className("android.view.View"))));
+            WebDriverWait wait2 = new WebDriverWait(driver, 10);
+            wait2.until(ExpectedConditions.visibilityOf(driver.findElement(MobileBy.className("android.view.View"))));
         } catch (Exception e) {
         }
 
@@ -158,8 +163,8 @@ public class T1_Payment {
                 .release()
                 .perform();
 
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(MobileBy.xpath("//*[@text='KAYDET']"))));
+        WebDriverWait wait3 = new WebDriverWait(driver, 20);
+        wait3.until(ExpectedConditions.visibilityOf(driver.findElement(MobileBy.xpath("//*[@text='KAYDET']"))));
         List<MobileElement> kaydetButton = driver.findElements(MobileBy.className("android.widget.Button"));
         kaydetButton.get(1).click();
 
@@ -185,42 +190,52 @@ public class T1_Payment {
                 case "0":
 
                     touchAction.tap(PointOption.point(570, 2750)).perform();
+                    Thread.sleep(100);
                     break;
                 case "1":
 
                     touchAction.tap(PointOption.point(180, 2090)).perform();
+                    Thread.sleep(100);
                     break;
                 case "2":
 
                     touchAction.tap(PointOption.point(570, 2090)).perform();
+                    Thread.sleep(100);
                     break;
                 case "3":
 
                     touchAction.tap(PointOption.point(940, 2090)).perform();
+                    Thread.sleep(100);
                     break;
                 case "4":
 
                     touchAction.tap(PointOption.point(180, 2300)).perform();
+                    Thread.sleep(100);
                     break;
                 case "5":
 
                     touchAction.tap(PointOption.point(570, 2300)).perform();
+                    Thread.sleep(100);
                     break;
                 case "6":
 
                     touchAction.tap(PointOption.point(940, 2300)).perform();
+                    Thread.sleep(100);
                     break;
                 case "7":
 
                     touchAction.tap(PointOption.point(180, 2500)).perform();
+                    Thread.sleep(100);
                     break;
                 case "8":
 
                     touchAction.tap(PointOption.point(570, 2500)).perform();
+                    Thread.sleep(100);
                     break;
                 case "9":
 
                     touchAction.tap(PointOption.point(940, 2500)).perform();
+                    Thread.sleep(100);
                     break;
             }
         }
@@ -234,14 +249,24 @@ public class T1_Payment {
         driver.findElement(MobileBy.xpath("//*[@text='2025']")).click();
         paymentBoxes.get(2).sendKeys("000");
 
-        //************ 23 - User taps <Siparişi Tamamla> button
+        TouchAction action1 = new TouchAction(driver);
+        action.press(PointOption.point(1280, 1800))
+                .waitAction(new WaitOptions().withDuration(Duration.ofMillis(1000)))
+                .moveTo(PointOption.point(1280, 260))
+                .release()
+                .perform();
+        WebDriverWait wait4 = new WebDriverWait(driver, 10);
+        wait4.until(ExpectedConditions.visibilityOf(driver.findElement(MobileBy.className("android.widget.CheckBox"))));
         driver.findElement(MobileBy.className("android.widget.CheckBox")).click();
-        Thread.sleep(1000);
+
+        //************ 23 - User taps <Siparişi Tamamla> button
+        WebDriverWait wait5 = new WebDriverWait(driver, 10);
+        wait5.until(ExpectedConditions.visibilityOf(driver.findElement(MobileBy.xpath("//*[@text='Siparişi Tamamla']"))));
         driver.findElement(MobileBy.xpath("//*[@text='Siparişi Tamamla']")).click();
 
         //************ 24 - Verify that user navigated to page of bank
-        WebDriverWait wait2 = new WebDriverWait(driver, 10);
-        wait2.until(ExpectedConditions.visibilityOf(driver.findElement(MobileBy.xpath("//*[@text='Özür dileriz, teknik nedenlerden dolayı şu anda işleminizi gerçekleştiremiyoruz.\n" +
+        WebDriverWait wait6 = new WebDriverWait(driver, 10);
+        wait6.until(ExpectedConditions.visibilityOf(driver.findElement(MobileBy.xpath("//*[@text='Özür dileriz, teknik nedenlerden dolayı şu anda işleminizi gerçekleştiremiyoruz.\n" +
                 "Lütfen bir süre sonra tekrar deneyiniz.']"))));
 
         Assertions.assertTrue(driver.findElement(MobileBy.xpath("//*[@text='Özür dileriz, teknik nedenlerden dolayı şu anda işleminizi gerçekleştiremiyoruz.\n" +
