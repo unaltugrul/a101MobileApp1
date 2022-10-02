@@ -237,7 +237,7 @@ public class T1_Payment {
                     break;
             }
         }
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         touchAction.tap(PointOption.point(1300, 2750)).perform();
         Thread.sleep(1000);
         List<MobileElement> spinners = driver.findElements(MobileBy.className("android.widget.Spinner"));
